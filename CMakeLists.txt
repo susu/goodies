@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 option(build_tests "Build all unit tests")
 
-project(__write_your_project_name_here__)
+project(goodie)
 
 if(APPLE OR UNIX)
   set(CMAKE_CXX_COMPILER "clang++")
