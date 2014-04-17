@@ -5,6 +5,7 @@ include_directories(igloo)
 
 set(TEST_SOURCE_FILES
     test_runner.cpp
+    enforce.cpp
     )
 
 add_executable(test_runner ${TEST_SOURCE_FILES})
