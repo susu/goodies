@@ -15,6 +15,8 @@ add_definitions(-std=c++11
                 -g
                 )
 
-add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(test)
+
+## Install section
+install(DIRECTORY include DESTINATION .)
