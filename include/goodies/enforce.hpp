@@ -29,7 +29,7 @@ namespace goodies
 #endif
 
 #define ENFORCE(cond,msg) \
-  goodies::enforce<GOODIES_ENFORCE_FAILURE_EXCEPTION>((cond), #cond,__FILE__,__LINE__,msg)
+  goodies::enforce<GOODIES_ENFORCE_FAILURE_EXCEPTION>((cond), #cond,__FILE__,__LINE__,goodies::MakeString()<<msg)
 
 
 #endif
