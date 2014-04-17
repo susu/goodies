@@ -19,7 +19,7 @@
 #define LOG_MSG(loglevel) \
   goodies::log::Logger::instance().getGuardedStream( \
       goodies::log::LogDetails{\
-        (loglevel), __FILE__, __LINE__, __PRETTY_FUNCTION__} )
+        (loglevel), __FILE__, __LINE__, __FUNCTION__} )
 
 namespace goodies
 {
