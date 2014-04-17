@@ -75,6 +75,10 @@ namespace goodies
                     }
                 }
 
+                void resetOutput(std::ostream & output)
+                {
+                    m_instance->m_outputStream = &output;
+                }
 
                 StreamGuard getGuardedStream(LogDetails details)
                 {
