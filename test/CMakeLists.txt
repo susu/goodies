@@ -7,6 +7,7 @@ set(TEST_SOURCE_FILES
     test_runner.cpp
     enforce.cpp
     logger.cpp
+    trace.cpp
     )
 
 
