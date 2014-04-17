@@ -5,6 +5,7 @@
 #include <string>
 #include <ostream>
 #include <memory>
+#include <goodies/enforce.hpp>
 
 #ifdef GOODIES_ENABLE_PERF_CRITICAL_LOGS
 #  define LOG_PERF LOG_MSG(goodies::log::LogLevel::PERF)
@@ -94,7 +95,10 @@ namespace goodies
                 void startLog( LogLevel loglevel, const char * file, int line,
                         const char * pretty);
                 std::ostream& getOutputStream()
-                { return *m_outputStream; }
+                {
+                    ENFORCE(m_outputStream != nullptr, "Output stream not initialized!");
+                    return *m_outputStream;
+                }
 
                 template<typename First,typename...Args>
                 void print(First&& first, Args&&...args)
