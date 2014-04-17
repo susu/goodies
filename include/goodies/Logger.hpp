@@ -62,6 +62,7 @@ namespace goodies
                 ~Logger();
                 static Logger& instance()
                 {
+                    ENFORCE(m_instance != nullptr, "Logger singleton instance is not valid!");
                     return *m_instance;
                 }
 
