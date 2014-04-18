@@ -8,6 +8,7 @@ set(TEST_SOURCE_FILES
     enforce.cpp
     logger.cpp
     trace.cpp
+    exception.cpp
     )
 
 
