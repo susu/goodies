@@ -3,9 +3,23 @@ option(build_tests "Build all unit tests")
 
 project(goodie)
 
+set(LIBS ${LIBS})
+
 if(APPLE OR UNIX)
-  set(CMAKE_CXX_COMPILER "clang++")
+    set(CMAKE_CXX_COMPILER "clang++")
 endif()
+
+if(UNIX)
+    message("Looking for libc++ and libc++abi ...")
+    find_library(libcpp_abi c++abi)
+    if(libcpp_abi)
+        message("libc++ found: ${libcpp_abi}")
+        set(LIBS ${LIBS} ${libcpp_abi} -stdlib=libc++)
+        add_definitions(-stdlib=libc++)
+    else()
+        message("... not found, falling back to libstdc++")
+    endif()
+endif(UNIX)
 
 include_directories(include)
 
