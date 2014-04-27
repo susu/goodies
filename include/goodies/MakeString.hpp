@@ -2,6 +2,7 @@
 #define GOODIES_MAKESTRING_HPP_INC
 
 #include <sstream>
+#include <algorithm>
 
 namespace goodies
 {
@@ -23,6 +24,14 @@ namespace goodies
         private:
             std::ostringstream m_out;
     };
+
+    // TODO maybe not the best place
+    inline std::string toUpper(std::string str)
+    {
+        std::transform(str.begin(), str.end(), str.begin(), [](char c){ return std::toupper(c); });
+        return str;
+    }
+
 }
 
 #endif

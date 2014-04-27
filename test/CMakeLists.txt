@@ -9,6 +9,7 @@ set(TEST_SOURCE_FILES
     logger.cpp
     trace.cpp
     exception.cpp
+    string.cpp
     )
 
 
