@@ -6,6 +6,7 @@ Common utility stuff for my c++ projects.
 Clone this repo such way:
 ```
 git clone https://github.com/susu/goodies
+cd goodies/
 git submodule update --init
 ```
 
