@@ -15,9 +15,8 @@ Describe(ATrace)
     std::ostringstream logOutput;
     void SetUp()
     {
-        goodies::log::Logger::initialize(logOutput);
-        goodies::log::Logger::instance().resetOutput(logOutput);
         logOutput.str("");
+        goodies::log::Logger::reinitialize(logOutput);
     }
 
     It(should_log_if_enters_and_leaves_a_block)

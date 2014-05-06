@@ -11,6 +11,7 @@ std::unique_ptr<Logger> Logger::m_instance;
 
 Logger::Logger(const std::string & loggername)
   : m_outputStream(&std::cout)
+  , m_logLevel(LogLevel::PERF)
 {}
 
 Logger::~Logger()
@@ -29,14 +30,19 @@ std::string getFormattedDate()
   return buffer;
 }
 
-const char* logLevelToStr(LogLevel level)
+std::ostream& goodies::log::operator<<(std::ostream& out, LogLevel level)
 {
   switch(level)
   {
-    case LogLevel::DEBUG: return "DEBUG";
-    case LogLevel::PERF: return "PERF";
+    case LogLevel::CRITICAL: return out << "CRITICAL";
+    case LogLevel::ERROR:    return out << "ERROR";
+    case LogLevel::WARNING:  return out << "WARNING";
+    case LogLevel::INFO:     return out << "INFO";
+    case LogLevel::DEBUG:    return out << "DEBUG";
+    case LogLevel::FINE:     return out << "FINE";
+    case LogLevel::PERF:     return out << "PERF";
   }
-  return "UNDEF";
+  return out << "UNDEF";
 }
 
 void Logger::startLog(LogLevel loglevel, const char * file, int line,
@@ -46,7 +52,7 @@ void Logger::startLog(LogLevel loglevel, const char * file, int line,
   auto lastSlash = fileStr.find_last_of('/');
 
   getOutputStream() << getFormattedDate() << ' ' <<
-                       logLevelToStr(loglevel) << " " <<
+                       loglevel << " " <<
                        fileStr.substr(lastSlash+1) << ':' << line << " [" <<
                        pretty << "] ";
 }

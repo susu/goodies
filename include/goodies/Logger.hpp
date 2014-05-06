@@ -27,9 +27,18 @@ namespace goodies
     {
         enum class LogLevel
         {
-            PERF,
-            DEBUG
+            // user levels
+            CRITICAL =  1,
+            ERROR    = 10,
+            WARNING  = 20,
+            INFO     = 30,
+
+            // development levels
+            DEBUG    = 40,
+            FINE     = 50,
+            PERF     = 60,
         };
+        std::ostream& operator<<(std::ostream& out, LogLevel level);
 
         struct LogDetails
         {
@@ -68,16 +77,27 @@ namespace goodies
 
                 static void initialize(std::ostream & output)
                 {
-                    if (m_instance == nullptr)
-                    {
-                        m_instance.reset(new Logger("logger"));
-                        m_instance->m_outputStream = &output;
+                    if (m_instance == nullptr) {
+                        reinitialize(output);
+                        m_instance->setLogLevel(LogLevel::PERF);
                     }
+                }
+
+                static void reinitialize(std::ostream & output)
+                {
+                    m_instance.reset(new Logger("logger"));
+                    m_instance->setLogLevel(LogLevel::PERF);
+                    m_instance->m_outputStream = &output;
                 }
 
                 void resetOutput(std::ostream & output)
                 {
-                    m_instance->m_outputStream = &output;
+                    m_outputStream = &output;
+                }
+
+                void setLogLevel(LogLevel newLevel)
+                {
+                    m_logLevel = newLevel;
                 }
 
                 StreamGuard getGuardedStream(LogDetails details)
@@ -88,14 +108,18 @@ namespace goodies
                 template<typename...Args>
                 void operator()(LogDetails details, Args&&...args)
                 {
-                    startLog(details.loglevel, details.file, details.line, details.pretty);
-                    print(std::forward<Args>(args)...);
+                    if (details.loglevel <= m_logLevel)
+                    {
+                        startLog(details.loglevel, details.file, details.line, details.pretty);
+                        print(std::forward<Args>(args)...);
+                    }
                 }
 
                 void endLog();
+
             private:
-                Logger( const std::string & loggerName );
-                Logger(Logger&);
+                Logger(const std::string& loggerName);
+                Logger(Logger&) = delete;
 
                 void startLog( LogLevel loglevel, const char * file, int line,
                         const char * pretty);
@@ -116,6 +140,8 @@ namespace goodies
                 {}
 
                 std::ostream * m_outputStream;
+                LogLevel m_logLevel;
+
                 static std::unique_ptr<Logger> m_instance;
         };
     }
