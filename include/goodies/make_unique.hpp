@@ -10,7 +10,7 @@ namespace std
   {
     static_assert(std::is_array<T>::value == false,
                   "This version of make_unique cannot be applied to arrays");
-    return std::unique_ptr<T>(new T(std::forward<Args&&>(args)...));
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
   }
 }
 
