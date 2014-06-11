@@ -12,6 +12,7 @@ git submodule update --init
 
 You can add this repo to your CMake project via ExternalProject. E.g.:
 ```
+include(ExternalProject)
 ExternalProject_Add(
     GOODIES
     GIT_REPOSITORY https://github.com/susu/goodies
