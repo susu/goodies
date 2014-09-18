@@ -10,6 +10,7 @@ set(TEST_SOURCE_FILES
     trace.cpp
     exception.cpp
     string.cpp
+    make_unique.cpp
     )
 
 

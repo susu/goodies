@@ -1,6 +1,7 @@
 #ifndef GOODIES_MAKE_UNIQUE_HPP_INC
 #define GOODIES_MAKE_UNIQUE_HPP_INC
 
+#if __cplusplus <= 201103L
 #include <memory>
 
 namespace std
@@ -14,4 +15,5 @@ namespace std
   }
 }
 
+#endif
 #endif
