@@ -13,7 +13,12 @@
 #  define LOG_PERF(...)
 #endif
 
+#define LOG_CRITICAL LOG_MSG(goodies::log::LogLevel::CRITICAL)
+#define LOG_ERROR LOG_MSG(goodies::log::LogLevel::ERROR)
+#define LOG_WARNING LOG_MSG(goodies::log::LogLevel::WARNING)
+#define LOG_INFO LOG_MSG(goodies::log::LogLevel::INFO)
 #define LOG_DEBUG LOG_MSG(goodies::log::LogLevel::DEBUG)
+#define LOG_FINE  LOG_MSG(goodies::log::LogLevel::FINE)
 
 
 #define LOG_MSG(loglevel) \

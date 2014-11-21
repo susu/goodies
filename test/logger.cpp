@@ -31,5 +31,8 @@ Describe(ALogger)
         goodies::log::Logger::instance().setLogLevel(goodies::log::LogLevel::INFO);
         LOG_DEBUG("msg-test-2");
         AssertThat(ss.str(), Is().Not().Containing("msg-test-2"));
+
+        LOG_INFO("info-stuff");
+        AssertThat(ss.str(), Is().Containing("info-stuff"));
     }
 };
