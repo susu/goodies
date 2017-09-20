@@ -1,4 +1,5 @@
 #include <igloo/igloo_alt.h>
+#include <functional>
 
 #include <goodies/Trace.hpp>
 
